@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">hilt-coroutine-payment</string>
+
+    <string name="sign_in_continue_with_google">Continue With Google</string>
+    <string name="sign_in_continue_with_kakao">Continue With Kakao</string>
+    <string name="sign_in_continue_with_naver">Continue With Naver</string>
 </resources>
