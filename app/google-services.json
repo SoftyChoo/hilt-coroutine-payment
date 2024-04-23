@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "859434094168",
+    "project_id": "payment-e8fb2",
+    "storage_bucket": "payment-e8fb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859434094168:android:256defacbbf728e03ec42d",
+        "android_client_info": {
+          "package_name": "com.example.hilt_coroutine_payment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCglZxMGRrfzhDIQDv7R04D011b0sGfzXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
