@@ -22,13 +22,13 @@ class SplashActivity : AppCompatActivity() {
                 if (viewModel.isLogin()) {
                     startMainActivity()
                 } else {
-                    startLoginActivity()
+                    startSignInActivity()
                 }
             }
         }
     }
 
-    private fun startLoginActivity() {
+    private fun startSignInActivity() {
         val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
         finish()
