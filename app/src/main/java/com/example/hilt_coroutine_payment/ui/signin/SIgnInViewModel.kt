@@ -24,6 +24,10 @@ class SignInViewModel(private val app: Application) : AndroidViewModel(app) {
             _isSaved.value = true
         }
     }
+
+    fun setSignType(type: SignInType){
+        shared.setSignInType(type)
+    }
 //    fun attemptSignIn(signInType: SignInType){
 //        when(signInType){
 //            SignInType.kAKAO -> signInKakao()

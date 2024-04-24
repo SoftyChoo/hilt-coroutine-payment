@@ -13,6 +13,7 @@ import com.example.hilt_coroutine_payment.R
 import com.example.hilt_coroutine_payment.data.model.UserInfo
 import com.example.hilt_coroutine_payment.databinding.ActivitySignInBinding
 import com.example.hilt_coroutine_payment.ui.signup.SignUpActivity
+import com.example.hilt_coroutine_payment.util.SignInType
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -48,6 +49,7 @@ class SignInActivity : AppCompatActivity() {
 
     private fun initView() = with(binding) {
         btnKakao.setOnClickListener {
+            // 현재 사업자 등록이 되지 않아 다른 정보를 받아올 수 없음
             signInKakao()
         }
         btnNaver.setOnClickListener {
@@ -123,7 +125,10 @@ class SignInActivity : AppCompatActivity() {
                     email = user.kakaoAccount?.email,
                     phone = user.kakaoAccount?.phoneNumber
                 )
-                viewModel.saveUserInfo(userInfo)
+                viewModel.apply {
+                    saveUserInfo(userInfo)
+                    setSignType(SignInType.kAKAO)
+                }
             }
         }
     }
@@ -160,7 +165,10 @@ class SignInActivity : AppCompatActivity() {
                 email = response.profile?.get("email").toString(),
                 phone = response.profile?.get("mobile").toString()
             )
-            viewModel.saveUserInfo(userInfo)
+            viewModel.apply {
+                saveUserInfo(userInfo)
+                setSignType(SignInType.NAVER)
+            }
 
             toast("로그인에 성공했습니다")
             Log.i(TAG, "네이버 로그인 성공 : ${response.profile}")
@@ -214,7 +222,10 @@ class SignInActivity : AppCompatActivity() {
                 email = user?.email,
                 phone = user?.phoneNumber
             )
-            viewModel.saveUserInfo(userInfo)
+            viewModel.apply {
+                saveUserInfo(userInfo)
+                setSignType(SignInType.GOOGLE)
+            }
 
         } else {
             toast("로그인에 실패했습니다")

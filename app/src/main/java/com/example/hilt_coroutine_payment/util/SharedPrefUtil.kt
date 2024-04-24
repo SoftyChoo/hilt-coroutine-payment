@@ -12,6 +12,7 @@ class SharedPrefUtil(context: Context) {
     companion object {
         private val USER_INFORMATION_KEY = "user_information_key"
         private val USER_BOOLEAN_KEY = "user_boolean_key"
+        private val SIGN_IN_TYPE_KEY = "sign_in_type_key"
     }
 
     /**
@@ -66,5 +67,19 @@ class SharedPrefUtil(context: Context) {
      * */
     fun clearPref() {
         pref.edit().clear().apply()
+    }
+
+    fun setSignInType(type:SignInType){
+        pref.edit().putString(SIGN_IN_TYPE_KEY,type.toString()).apply()
+    }
+
+    fun getSignInType(): SignInType {
+        val type = pref.getString(SIGN_IN_TYPE_KEY, null)
+        return when (type) {
+            SignInType.kAKAO.toString() -> SignInType.kAKAO
+            SignInType.NAVER.toString() -> SignInType.NAVER
+            SignInType.GOOGLE.toString() -> SignInType.GOOGLE
+            else -> SignInType.NOTHING
+        }
     }
 }
