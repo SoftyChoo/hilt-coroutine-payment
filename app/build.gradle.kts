@@ -91,15 +91,14 @@ dependencies {
     implementation("com.kakao.sdk:v2-auth:2.20.1")
 
     // 네이버 로그인 API 모듈
-//    implementation("com.navercorp.nid:oauth:5.9.0") // jdk 11
+    // implementation("com.navercorp.nid:oauth:5.9.0") // jdk 11
     implementation("com.navercorp.nid:oauth-jdk8:5.9.0") // jdk 8
-//
-//
-//    // 구글 로그인 API 모듈
-//    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
-//    implementation("com.firebaseui:firebase-ui-auth:7.2.0")
-//    implementation("com.google.firebase:firebase-auth-ktx")
-//    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    // 구글 로그인 API 모듈
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.firebaseui:firebase-ui-auth:7.2.0")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
 //
 //    // 토스 결제 API 모듈
 //    implementation("com.github.tosspayments:payment-sdk-android:0.1.14")

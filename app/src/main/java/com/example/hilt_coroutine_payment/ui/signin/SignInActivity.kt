@@ -12,6 +12,10 @@ import com.example.hilt_coroutine_payment.R
 import com.example.hilt_coroutine_payment.data.model.UserInfo
 import com.example.hilt_coroutine_payment.databinding.ActivitySignInBinding
 import com.example.hilt_coroutine_payment.ui.signup.SignUpActivity
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
+import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
+import com.google.firebase.auth.FirebaseAuth
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -41,18 +45,18 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun initView() = with(binding) {
-        btnKakao.setOnClickListener { signInKakao() }
-
+        btnKakao.setOnClickListener {
+            signInKakao()
+        }
         btnNaver.setOnClickListener {
             NaverIdLoginSDK.authenticate(this@SignInActivity, oauthLoginCallback)
         }
         btnGoogle.setOnClickListener {
-
+            googleLogin()
         }
         btnSignUp.setOnClickListener {
             val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
         }
-
     }
 
     private fun initViewModel() = with(viewModel) {
@@ -134,12 +138,14 @@ class SignInActivity : AppCompatActivity() {
             Log.i(TAG, "getRefreshToken ${NaverIdLoginSDK.getRefreshToken()}")
             NidOAuthLogin().getProfileMap(profileCallback)
         }
+
         override fun onFailure(httpStatus: Int, message: String) {
             val errorCode = NaverIdLoginSDK.getLastErrorCode().code
             val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
             toast("로그인에 실패했습니다")
             Log.e(TAG, "네이버 로그인 실패 : $errorCode, $errorDescription")
         }
+
         override fun onError(errorCode: Int, message: String) {
             onFailure(errorCode, message)
         }
@@ -157,14 +163,60 @@ class SignInActivity : AppCompatActivity() {
             toast("로그인에 성공했습니다")
             Log.i(TAG, "네이버 로그인 성공 : ${response.profile}")
         }
+
         override fun onFailure(httpStatus: Int, message: String) {
             val errorCode = NaverIdLoginSDK.getLastErrorCode().code
             val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
             toast("로그인에 실패했습니다")
             Log.e(TAG, "네이버 로그인 실패 : $errorCode, $errorDescription")
         }
+
         override fun onError(errorCode: Int, message: String) {
             onFailure(errorCode, message)
+        }
+    }
+
+    /**
+     * SignIn With Google
+     */
+    private fun googleLogin() {
+        // Choose authentication providers
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.GoogleBuilder().build(),
+        )
+
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .build()
+        signInLauncher.launch(signInIntent)
+    }
+
+    private val signInLauncher = registerForActivityResult(
+        FirebaseAuthUIActivityResultContract(),
+    ) { res ->
+        this.onSignInResult(res)
+    }
+
+    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        val response = result.idpResponse
+        if (result.resultCode == RESULT_OK) {
+            // Successfully signed in
+            val user = FirebaseAuth.getInstance().currentUser
+
+            toast("로그인에 성공했습니다")
+            Log.d(TAG, "구글 로그인 성공 : ${user?.email}, ${user?.phoneNumber}, ${user?.displayName}")
+
+            val userInfo = UserInfo(
+                name = user?.displayName,
+                email = user?.email,
+                phone = user?.phoneNumber
+            )
+            viewModel.saveUserInfo(userInfo)
+
+        } else {
+            toast("로그인에 실패했습니다")
+            Log.w(TAG, "구글 로그인 실페 : ${response?.error?.message}")
         }
     }
 }
