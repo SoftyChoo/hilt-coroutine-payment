@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">hilt-coroutine-payment</string>
 
+    <!--  Kakao Native App Key  -->
+    <string name="KAKAO_NATIVE_APP_KEY">cfd52d78a38a0d71c022e4d129d4636e</string>
+
     <string name="sign_in_continue_with_google">Continue With Google</string>
     <string name="sign_in_continue_with_kakao">Continue With Kakao</string>
     <string name="sign_in_continue_with_naver">Continue With Naver</string>
+
+
+
+
 </resources>
