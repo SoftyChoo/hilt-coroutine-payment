@@ -1,58 +1,65 @@
 package com.example.hilt_coroutine_payment.util
 
 import android.content.Context
+import com.example.hilt_coroutine_payment.data.model.UserInfo
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class SharedPrefUtil(context: Context) {
 
     private val pref = context.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
 
-    /**
-     * String 설정
-     */
-    fun setStringPref(key: String, value: String?) {
-        pref.edit().putString(key, value).apply()
+    companion object {
+        private val USER_INFORMATION_KEY = "user_information_key"
+        private val USER_BOOLEAN_KEY = "user_boolean_key"
     }
 
     /**
-     * String 반환
+     * User Data 저장
      */
-    fun getStringPref(key: String, defaultValue: String?): String? {
-        return pref.getString(key, defaultValue)
-    }
-    /**
-     * Int 설정
-     */
-    fun setIntPref(key: String, value: Int) {
-        pref.edit().putInt(key, value).apply()
+    fun setUserInfo(value: UserInfo) {
+        val gson = Gson()
+        val json = gson.toJson(value)
+        val editor = pref?.edit()
+        editor?.putString(USER_INFORMATION_KEY, json)
+        editor?.apply()
     }
 
     /**
-     * Int 반환
+     * User Data 반환
      */
-    fun getIntPref(key: String, defaultValue: Int): Int {
-        return pref.getInt(key, defaultValue)
+    fun getUserInfo(): UserInfo {
+        val json = pref?.getString(USER_INFORMATION_KEY, null)
+
+        return if (json != null) {
+            val gson = Gson()
+            val storedData: UserInfo = gson.fromJson(json, object : TypeToken<UserInfo>() {}.type)
+            storedData
+        } else {
+            UserInfo()
+        }
     }
 
     /**
-     * Boolean 설정
+     * User Data 삭제
      */
-    fun setBooleanPref(key: String, value: Boolean) {
-        pref.edit().putBoolean(key, value).apply()
+    fun deleteUserInfo() {
+        pref.edit().remove(USER_INFORMATION_KEY).apply()
     }
 
-    /**
-     * Boolean 반환
-     */
-    fun getBooleanPref(key: String, defaultValue: Boolean): Boolean {
-        return pref.getBoolean(key, defaultValue)
+    fun setUserBoolean(boolean: Boolean) {
+        pref.edit().putBoolean(USER_BOOLEAN_KEY, boolean).apply()
     }
 
-    /**
-     * Preferences key, value 삭제
-     */
-    fun removeKeyPref(key: String) {
-        pref.edit().remove(key).apply()
+    fun getUserBoolean(defaultValue: Boolean): Boolean {
+        return pref.getBoolean(USER_BOOLEAN_KEY,defaultValue)
     }
+
+    fun deleteUserBoolean() {
+        pref.edit().remove(USER_BOOLEAN_KEY).apply()
+    }
+
+    /////////==========================///////////
 
     /**
      * Preference 초기화

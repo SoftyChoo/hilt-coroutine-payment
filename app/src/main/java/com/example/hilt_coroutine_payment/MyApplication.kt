@@ -9,11 +9,8 @@ import dagger.hilt.android.HiltAndroidApp
 class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-
-//        val KAKAO_NATIVE_APP_KEY = "cfd52d78a38a0d71c022e4d129d4636e"
         KakaoSdk.init(this, R.string.KAKAO_NATIVE_APP_KEY.toString())
 
-//        KakaoSdk.init(this, KAKAO_NATIVE_APP_KEY)
 
 //        val OAUTH_CLIENT_ID = "8cWEYtwRpoPkyV4eCLG5"
 //        val OAUTH_CLIENT_SECRET = "ZN2UoEEa4J"

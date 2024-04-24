@@ -7,8 +7,9 @@
     <string name="sign_in_continue_with_google">Continue With Google</string>
     <string name="sign_in_continue_with_kakao">Continue With Kakao</string>
     <string name="sign_in_continue_with_naver">Continue With Naver</string>
-
-
+    <string name="tv_sign_in">소셜 로그인</string>
+    <string name="tv_sign_up">회원가입</string>
+    <string name="creat_new_account">CREAT NEW ACCOUNT</string>
 
 
 </resources>

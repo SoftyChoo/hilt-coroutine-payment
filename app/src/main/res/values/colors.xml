@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_orange">#F27138</color>
+    <color name="deep_orange">#F85811</color>
     <color name="naver_green">#2CB24A</color>
     <color name="kakao_yellow">#FEE500</color>
     <color name="google_blue">#859FE1</color>
