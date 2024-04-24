@@ -25,6 +25,6 @@ class SplashViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun isLogin(): Boolean {
-        return shared.getBooleanPref(IS_LOGIN, false)
+        return shared.getUserBoolean(false)
     }
 }

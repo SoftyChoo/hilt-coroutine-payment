@@ -89,12 +89,10 @@ dependencies {
     implementation ("com.kakao.sdk:v2-share:2.20.1") // 카카오톡 공유 API 모듈
     implementation("com.kakao.sdk:v2-common:2.20.1")
     implementation("com.kakao.sdk:v2-auth:2.20.1")
-//    implementation("com.kakao.sdk:v2-user:2.20.1")
 
-//
-//    // 네이버 로그인 API 모듈
-////    implementation("com.navercorp.nid:oauth:5.9.0") // jdk 11
-//    implementation("com.navercorp.nid:oauth-jdk8:5.9.0") // jdk 8
+    // 네이버 로그인 API 모듈
+//    implementation("com.navercorp.nid:oauth:5.9.0") // jdk 11
+    implementation("com.navercorp.nid:oauth-jdk8:5.9.0") // jdk 8
 //
 //
 //    // 구글 로그인 API 모듈

@@ -16,6 +16,11 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
+import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileMap
 
 class SignInActivity : AppCompatActivity() {
 
@@ -23,9 +28,10 @@ class SignInActivity : AppCompatActivity() {
 
     private val viewModel: SignInViewModel by viewModels()
 
-    companion object{
+    companion object {
         private const val TAG = "SignInActivity"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -35,23 +41,23 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun initView() = with(binding) {
-        btnKakao.setOnClickListener { signInKakao()}
+        btnKakao.setOnClickListener { signInKakao() }
 
         btnNaver.setOnClickListener {
-
+            NaverIdLoginSDK.authenticate(this@SignInActivity, oauthLoginCallback)
         }
         btnGoogle.setOnClickListener {
 
         }
         btnSignUp.setOnClickListener {
-            val intent = Intent(this@SignInActivity,SignUpActivity::class.java)
+            val intent = Intent(this@SignInActivity, SignUpActivity::class.java)
         }
 
     }
 
     private fun initViewModel() = with(viewModel) {
         isSaved.observe(this@SignInActivity, Observer {
-            if(it){
+            if (it) {
                 val intent = Intent(this@SignInActivity, MainActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -61,7 +67,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     /**
-     * Sign With Kakao
+     * SignIn With Kakao
      */
 
     // 카카오계정으로 로그인 공통 callback 구성
@@ -100,12 +106,11 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    fun getKakaoUserInfo(){
+    fun getKakaoUserInfo() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e(TAG, "사용자 정보 요청 실패", error)
-            }
-            else if (user != null) {
+            } else if (user != null) {
 
                 val userInfo = UserInfo(
                     name = user.kakaoAccount?.profile?.nickname,
@@ -114,6 +119,52 @@ class SignInActivity : AppCompatActivity() {
                 )
                 viewModel.saveUserInfo(userInfo)
             }
+        }
+    }
+
+    /**
+     * SignIn With Naver
+     */
+
+    // 네이버 로그인 콜백
+    private val oauthLoginCallback = object : OAuthLoginCallback {
+        override fun onSuccess() {
+            // 네이버 로그인 인증이 성공했을 때 수행할 코드 추가
+            Log.i(TAG, "getAccessToken ${NaverIdLoginSDK.getAccessToken()}")
+            Log.i(TAG, "getRefreshToken ${NaverIdLoginSDK.getRefreshToken()}")
+            NidOAuthLogin().getProfileMap(profileCallback)
+        }
+        override fun onFailure(httpStatus: Int, message: String) {
+            val errorCode = NaverIdLoginSDK.getLastErrorCode().code
+            val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
+            toast("로그인에 실패했습니다")
+            Log.e(TAG, "네이버 로그인 실패 : $errorCode, $errorDescription")
+        }
+        override fun onError(errorCode: Int, message: String) {
+            onFailure(errorCode, message)
+        }
+    }
+
+    val profileCallback = object : NidProfileCallback<NidProfileMap> {
+        override fun onSuccess(response: NidProfileMap) {
+            val userInfo = UserInfo(
+                name = response.profile?.get("name").toString(),
+                email = response.profile?.get("email").toString(),
+                phone = response.profile?.get("mobile").toString()
+            )
+            viewModel.saveUserInfo(userInfo)
+
+            toast("로그인에 성공했습니다")
+            Log.i(TAG, "네이버 로그인 성공 : ${response.profile}")
+        }
+        override fun onFailure(httpStatus: Int, message: String) {
+            val errorCode = NaverIdLoginSDK.getLastErrorCode().code
+            val errorDescription = NaverIdLoginSDK.getLastErrorDescription()
+            toast("로그인에 실패했습니다")
+            Log.e(TAG, "네이버 로그인 실패 : $errorCode, $errorDescription")
+        }
+        override fun onError(errorCode: Int, message: String) {
+            onFailure(errorCode, message)
         }
     }
 }
