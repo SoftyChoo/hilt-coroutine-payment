@@ -14,9 +14,10 @@ class SignInViewModel(private val app: Application) : AndroidViewModel(app) {
     private val _isSaved = MutableLiveData<Boolean>()
     val isSaved : LiveData<Boolean> get() = _isSaved
 
+    private val shared = SharedPrefUtil(app)
+
     fun saveUserInfo(userInfo : UserInfo){
-        val sharedPref = SharedPrefUtil(app)
-        sharedPref.apply {
+        shared.apply {
             setUserInfo(userInfo)
             setUserBoolean(true)
 

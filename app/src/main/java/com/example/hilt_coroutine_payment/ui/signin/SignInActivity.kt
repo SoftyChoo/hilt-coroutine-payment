@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.animation.AnimationUtils
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.hilt_coroutine_payment.MainActivity
@@ -42,6 +43,7 @@ class SignInActivity : AppCompatActivity() {
 
         initView()
         initViewModel()
+        startBlinkingAnimation()
     }
 
     private fun initView() = with(binding) {
@@ -218,5 +220,15 @@ class SignInActivity : AppCompatActivity() {
             toast("로그인에 실패했습니다")
             Log.w(TAG, "구글 로그인 실페 : ${response?.error?.message}")
         }
+    }
+
+    private fun startBlinkingAnimation() = with(binding) {
+        val startAnimation = AnimationUtils.loadAnimation(this@SignInActivity, R.anim.blink_animation)
+
+//        ivLogo.startAnimation(startAnimation)
+
+        btnKakao.startAnimation(startAnimation)
+        btnNaver.startAnimation(startAnimation)
+        btnGoogle.startAnimation(startAnimation)
     }
 }
