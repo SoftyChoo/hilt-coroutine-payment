@@ -12,6 +12,8 @@
     <string name="creat_new_account">CREAT NEW ACCOUNT</string>
     <string name="sign_out">로그아웃</string>
     <string name="message_back_pressed">뒤로가기를 한 번 더 누르면 종료됩니다.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

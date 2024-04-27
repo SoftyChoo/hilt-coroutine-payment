@@ -79,9 +79,9 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.2")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
 
-//    // Navigation
-//    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
-//    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     // 카카오 로그인 API 모듈
     implementation ("com.kakao.sdk:v2-all:2.20.1") // 전체 모듈 설치, 2.11.0 버전부터 지원
