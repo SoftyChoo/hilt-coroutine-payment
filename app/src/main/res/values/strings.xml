@@ -11,9 +11,51 @@
     <string name="tv_sign_up">회원가입</string>
     <string name="creat_new_account">CREAT NEW ACCOUNT</string>
     <string name="sign_out">로그아웃</string>
-    <string name="message_back_pressed">뒤로가기를 한 번 더 누르면 종료됩니다.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_payment">결제하기</string>
+
+
+    <!-- Error Messages -->
+    <string name="error_name">이름은 2글자 이상이어야 합니다.</string>
+    <string name="error_email">올바른 이메일을 입력해주세요.</string>
+    <string name="error_phone">연락처는 11자리여야 합니다.</string>
+    <string name="error_pwd">비밀번호는 최소 6자리 이상, 영문, 숫자, 특수문자를 포함해야 합니다.</string>
+    <string name="error_pwd_confirm">비밀번호가 일치하지 않습니다.</string>
+    <string name="error_policy">약관에 동의해주세요.</string>
+
+    <!-- 상품 -->
+    <string name="product_option"><b>용량</b>: 80ml - 1개</string>
+    <string name="product_price">%,d원</string>
+    <string name="discount_price">-%,d원</string>
+    <string name="shipping_price">+%,d원</string>
+    <string name="request_payment">결제하기</string>
+    <string name="title_total_price">최종 결제금액</string>
+    <string name="label_price">상품가격</string>
+    <string name="label_discount">쿠폰 할인</string>
+    <string name="label_point_use">포인트 사용</string>
+    <string name="label_shipping_fee">배송비</string>
+    <string name="label_total">총 결제금액</string>
+    <string name="title_coupon">쿠폰/포인트</string>
+    <string name="label_coupon">쿠폰</string>
+    <string name="btn_coupon">쿠폰적용</string>
+    <string name="label_point">포인트</string>
+    <string name="btn_point_all">사용</string>
+    <string name="label_my_point">보유 포인트 %,d</string>
+    <string name="label_point_notice">5,000 포인트 이상 보유 및 10,000원 이상 구매시 사용 가능</string>
+    <string name="title_shipping">배송 정보</string>
+    <string name="label_memo">배송 메모</string>
+    <string name="label_memo_hint">배송 메모를 선택해 주세요</string>
+    <string name="btn_change">변경</string>
+    <string name="title_product">주문 상품 정보</string>
+    <string name="product_name">Daily Facial Soap</string>
+    <string name="title_user">주문자 정보</string>
+    <string name="btn_edit">수정</string>
+
+    <string name="message_back_pressed">뒤로가기를 한번 더 누르면 앱이 종료됩니다.</string>
+    <string name="logout">로그아웃</string>
+    <string name="go_home">처음으로</string>
+    <string name="next_step">다음 단계로</string>
 
 
 </resources>

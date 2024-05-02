@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.hilt_coroutine_payment.util.Constant.IS_LOGIN
 import com.example.hilt_coroutine_payment.util.SharedPrefUtil
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

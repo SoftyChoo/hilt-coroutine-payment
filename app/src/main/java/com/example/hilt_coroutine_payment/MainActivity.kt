@@ -10,6 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.hilt_coroutine_payment.databinding.ActivityMainBinding
+import com.example.hilt_coroutine_payment.ui.payment.PaymentActivity
 import com.example.hilt_coroutine_payment.ui.signin.SignInActivity
 import com.example.hilt_coroutine_payment.util.Extension.toast
 import com.example.hilt_coroutine_payment.util.SignInType
@@ -64,6 +65,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView() = with(binding) {
+        btnPayment.setOnClickListener {
+            val intent = Intent(this@MainActivity,PaymentActivity::class.java)
+        }
         btnSignOut.setOnClickListener {
             viewModel.checkSignInType()
         }

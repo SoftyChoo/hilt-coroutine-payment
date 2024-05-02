@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.hilt_coroutine_payment.ui.payment.PaymentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.payment.PaymentFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="20dp"
+                tools:context=".ui.payment.PaymentActivity">
+
+                <!-- 주문 상품 정보 -->
+                <include
+                    android:id="@+id/layoutProduct"
+                    layout="@layout/layout_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:viewModel="@{viewModel}" />
+
+                <!-- 주문자 정보 -->
+                <include
+                    android:id="@+id/layoutUserinfo"
+                    layout="@layout/layout_userinfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/layoutProduct"
+                    app:viewModel="@{viewModel}" />
+
+                <!-- 배송 정보 -->
+                <include
+                    android:id="@+id/layoutShipping"
+                    layout="@layout/layout_shipping"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/layoutUserinfo"
+                    app:viewModel="@{viewModel}" />
+
+                <!-- 쿠폰/포인트 -->
+                <include
+                    android:id="@+id/layoutCoupon"
+                    layout="@layout/layout_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/layoutShipping"
+                    app:viewModel="@{viewModel}" />
+
+                <!-- 최종 결제 금액 -->
+                <include
+                    android:id="@+id/layoutTotal"
+                    layout="@layout/layout_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/layoutCoupon"
+                    app:viewModel="@{viewModel}" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/initPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/blue"
+                    android:text="@string/next_step"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layoutTotal" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

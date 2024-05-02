@@ -13,6 +13,7 @@ class SharedPrefUtil(context: Context) {
         private val USER_INFORMATION_KEY = "user_information_key"
         private val USER_BOOLEAN_KEY = "user_boolean_key"
         private val SIGN_IN_TYPE_KEY = "sign_in_type_key"
+        private val USER_POINT_KEY = "user_point_key"
     }
 
     /**
@@ -81,5 +82,22 @@ class SharedPrefUtil(context: Context) {
             SignInType.GOOGLE.toString() -> SignInType.GOOGLE
             else -> SignInType.NOTHING
         }
+    }
+
+    /**
+     * Set Int data
+     * */
+    fun setUserPoint(value: Int) {
+        pref.edit().apply {
+            putInt(USER_POINT_KEY, value)
+            apply()
+        }
+    }
+
+    /**
+     * Get Int data
+     * */
+    fun getUserPoint(defaultValue: Int): Int {
+        return pref.getInt(USER_POINT_KEY, defaultValue)
     }
 }

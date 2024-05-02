@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="memo_array">
+        <item>부재시 문 앞에 두고 가주세요</item>
+        <item>부재시 경비실에 보관해주세요</item>
+    </string-array>
+</resources>

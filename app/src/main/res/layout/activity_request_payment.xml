@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.hilt_coroutine_payment.ui.payment.PaymentViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.payment.RequestPaymentActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <!-- 결제 모듈 -->
+            <com.tosspayments.paymentsdk.view.PaymentMethod
+                android:id="@+id/payment_widget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:minHeight="300dp"
+                app:layout_constraintBottom_toTopOf="@id/agreement_widget"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.tosspayments.paymentsdk.view.Agreement
+                android:id="@+id/agreement_widget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:minHeight="100dp"
+                app:layout_constraintBottom_toTopOf="@id/requestPayment"
+                app:layout_constraintTop_toBottomOf="@id/payment_widget" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/requestPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/blue"
+                android:text="@string/request_payment"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/agreement_widget" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:indeterminateTint="@color/blue"
+                android:visibility="@{viewModel.showProgress ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
+
