@@ -14,6 +14,8 @@ class SharedPrefUtil(context: Context) {
         private val USER_BOOLEAN_KEY = "user_boolean_key"
         private val SIGN_IN_TYPE_KEY = "sign_in_type_key"
         private val USER_POINT_KEY = "user_point_key"
+        private val USER_ROLE_KEY = "user_role_key"
+        private val USER_PASSWORD_KEY = "user_password_key"
     }
 
     /**
@@ -85,7 +87,7 @@ class SharedPrefUtil(context: Context) {
     }
 
     /**
-     * Set Int data
+     * Set User Point
      * */
     fun setUserPoint(value: Int) {
         pref.edit().apply {
@@ -95,9 +97,44 @@ class SharedPrefUtil(context: Context) {
     }
 
     /**
-     * Get Int data
+     * Get User Point
      * */
     fun getUserPoint(defaultValue: Int): Int {
         return pref.getInt(USER_POINT_KEY, defaultValue)
+    }
+
+    /**
+     * Set Role
+     * */
+    fun setRole(value: String?) {
+        pref.edit().apply {
+            putString(USER_ROLE_KEY, value)
+            apply()
+        }
+    }
+
+    /**
+     * Get Role
+     * */
+    fun getRole(defaultValue: String?): String? {
+        return pref.getString(USER_ROLE_KEY, defaultValue)
+    }
+
+
+    /**
+     * Set Pwd
+     * */
+    fun setPassword(value: String?) {
+        pref.edit().apply {
+            putString(USER_PASSWORD_KEY, value)
+            apply()
+        }
+    }
+
+    /**
+     * Get Pwd
+     * */
+    fun getPassword(defaultValue: String?): String? {
+        return pref.getString(USER_PASSWORD_KEY, defaultValue)
     }
 }

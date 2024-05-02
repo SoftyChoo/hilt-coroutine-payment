@@ -123,7 +123,8 @@ class SignInActivity : AppCompatActivity() {
                 val userInfo = UserInfo(
                     name = user.kakaoAccount?.profile?.nickname,
                     email = user.kakaoAccount?.email,
-                    phone = user.kakaoAccount?.phoneNumber
+                    phone = user.kakaoAccount?.phoneNumber,
+                    point = 5000
                 )
                 viewModel.apply {
                     saveUserInfo(userInfo)
@@ -163,7 +164,8 @@ class SignInActivity : AppCompatActivity() {
             val userInfo = UserInfo(
                 name = response.profile?.get("name").toString(),
                 email = response.profile?.get("email").toString(),
-                phone = response.profile?.get("mobile").toString()
+                phone = response.profile?.get("mobile").toString(),
+                point = 5000
             )
             viewModel.apply {
                 saveUserInfo(userInfo)
@@ -220,7 +222,8 @@ class SignInActivity : AppCompatActivity() {
             val userInfo = UserInfo(
                 name = user?.displayName,
                 email = user?.email,
-                phone = user?.phoneNumber
+                phone = user?.phoneNumber,
+                point = 5000
             )
             viewModel.apply {
                 saveUserInfo(userInfo)
@@ -234,7 +237,8 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun startBlinkingAnimation() = with(binding) {
-        val startAnimation = AnimationUtils.loadAnimation(this@SignInActivity, R.anim.blink_animation)
+        val startAnimation =
+            AnimationUtils.loadAnimation(this@SignInActivity, R.anim.blink_animation)
 
 //        ivLogo.startAnimation(startAnimation)
 

@@ -20,7 +20,6 @@ class SignInViewModel(private val app: Application) : AndroidViewModel(app) {
         shared.apply {
             setUserInfo(userInfo)
             setUserBoolean(true)
-
             _isSaved.value = true
         }
     }

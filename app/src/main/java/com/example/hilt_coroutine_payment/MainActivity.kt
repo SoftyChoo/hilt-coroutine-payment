@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                 SignInType.kAKAO -> kakaoSignOut()
                 SignInType.NAVER -> naverSignOut()
                 SignInType.GOOGLE -> googleSignOut()
+                SignInType.SELF -> selfSignOut()
                 SignInType.NOTHING -> Unit
             }
         })
@@ -64,9 +65,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun selfSignOut() {
+        signOut()
+    }
+
     private fun initView() = with(binding) {
         btnPayment.setOnClickListener {
-            val intent = Intent(this@MainActivity,PaymentActivity::class.java)
+            val intent = Intent(this@MainActivity, PaymentActivity::class.java)
+            startActivity(intent)
         }
         btnSignOut.setOnClickListener {
             viewModel.checkSignInType()
@@ -93,6 +99,7 @@ class MainActivity : AppCompatActivity() {
                 //서버에서 토큰 삭제에 성공한 상태입니다.
                 NaverIdLoginSDK.logout()
             }
+
             override fun onFailure(httpStatus: Int, message: String) {
                 // 서버에서 토큰 삭제에 실패했어도 클라이언트에 있는 토큰은 삭제되어 로그아웃된 상태입니다.
                 // 클라이언트에 토큰 정보가 없기 때문에 추가로 처리할 수 있는 작업은 없습니다.
@@ -100,6 +107,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "errorDesc: ${NaverIdLoginSDK.getLastErrorDescription()}")
                 NaverIdLoginSDK.logout()
             }
+
             override fun onError(errorCode: Int, message: String) {
                 // 서버에서 토큰 삭제에 실패했어도 클라이언트에 있는 토큰은 삭제되어 로그아웃된 상태입니다.
                 // 클라이언트에 토큰 정보가 없기 때문에 추가로 처리할 수 있는 작업은 없습니다.
